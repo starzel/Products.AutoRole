@@ -59,7 +59,7 @@ class AutoRole(BasePlugin):
              mode='w'),
     )
 
-    manage_options = BasePlugin.manage_options[:1]
+    #manage_options = BasePlugin.manage_options[:1]
 
     def __init__(self, id, title=None, ip_roles=()):
         self._setId(id)
