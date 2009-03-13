@@ -3,8 +3,7 @@ AutoRole
 Copyright 2006 Norwegian Archive, Library and Museum Authority 
 (http://www.abm-utvikling.no)
 
-For technical questions, contact Helge Tesdal at Plone Solutions
-<info@plonesolutions.com>
+For technical questions, contact Helge Tesdal at Jarn <info@jarn.com>.
 
 AutoRole enables you to give certain roles to users from certain subnets.
 
