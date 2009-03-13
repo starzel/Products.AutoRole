@@ -10,10 +10,10 @@ def setupPlugins(portal, out):
 
     AutoRole = uf.manage_addProduct['AutoRole']
 
-    if 'AutoRole' not in ids:
-        AutoRole.addAutoRole('AutoRole')
+    if 'auto_role' not in ids:
+        AutoRole.addAutoRole('auto_role', 'Automatic Role Provider')
         print >> out, "Added AutoRole plugin."
-        activatePluginInterfaces(portal, 'AutoRole', out)
+        activatePluginInterfaces(portal, 'auto_role', out)
 
         plugins = portal.acl_users.plugins
         #plist = plugins.listPlugins(IUserFactoryPlugin)
