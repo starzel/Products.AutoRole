@@ -50,7 +50,7 @@ def quad2int(ip):
 class AutoRole(BasePlugin):
     """ Multi-plugin for assigning auto roles from IP. """
 
-    meta_type = 'AutoRole'
+    meta_type = 'Auto Role Plugin'
     security = ClassSecurityInfo()
 
     _properties = (
