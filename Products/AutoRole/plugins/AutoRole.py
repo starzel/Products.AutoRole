@@ -94,7 +94,8 @@ class AutoRole(BasePlugin):
         for line in self.ip_roles:
             try:
                 subnet, roles = line.split(':')
-                roles = set([r.strip() for r in roles.split(',')])
+                roles = [r.strip() for r in roles.split(',')]
+                roles = set(filter(None, roles))
             except (ValueError, AttributeError):
                 continue
             try:
