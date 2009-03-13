@@ -1,8 +1,8 @@
 from StringIO import StringIO
-
 from Products.PlonePAS.Extensions.Install import activatePluginInterfaces
 
-def setupPlugins(portal, out):
+
+def setup_auto_role_plugin(portal, out):
     uf = portal.acl_users
     ids = uf.objectIds()
 
@@ -15,17 +15,9 @@ def setupPlugins(portal, out):
         print >> out, "Added AutoRole plugin."
         activatePluginInterfaces(portal, 'auto_role', out)
 
-        plugins = portal.acl_users.plugins
-        #plist = plugins.listPlugins(IUserFactoryPlugin)
 
-        # Move plugins all the way to the top...
-        #while plugins.listPlugins(IRolesPlugin)[0][0] != 'AutoRole':
-        #    plugins.movePluginsUp(IRolesPlugin, ['AutoRole'])
-
-
-def install(self):
+def importVarious(context):
     out = StringIO()
 
-    setupPlugins(self, out)
-
-    return out.getvalue()
+    portal = context.getSite()
+    setup_auto_role_plugin(portal, out)
