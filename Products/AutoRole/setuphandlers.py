@@ -24,4 +24,4 @@ def importVarious(context):
         return
 
     setup_auto_role_plugin(site)
-    logger.info('Auto-role PAS plugin imported.')
+    logger.info('PAS plugin imported.')
