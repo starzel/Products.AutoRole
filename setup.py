@@ -5,18 +5,17 @@ version = '2.0dev'
 
 setup(name='Products.AutoRole',
       version=version,
-      description="AutoRole is a PAS plugin which can automatically add "
-                  "roles to (anonymous or logged-in) visitors "
-                  "based on their IP address.",
+      description="Add roles to (anonymous or logged-in) "
+                  "visitors based on their IP address.",
       long_description=open("README.txt").read() + "\n" +
                        open(os.path.join("docs", "HISTORY.txt")).read(),
       # Get more strings from http://www.python.org/pypi?%3Aaction=list_classifiers
       classifiers=[
-        "Framework :: Plone",
+        "Framework :: Zope2",
         "Programming Language :: Python",
         "Topic :: Software Development :: Libraries :: Python Modules",
         ],
-      keywords='',
+      keywords='autorole pas plugin roles groups',
       author='Jarn',
       author_email='info@jarn.com',
       url='http://plone.org/products/autorole',

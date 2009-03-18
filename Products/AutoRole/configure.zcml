@@ -6,16 +6,16 @@
 
   <genericsetup:registerProfile
     name="default"
-    title="Auto-role PAS plugin"
+    title="AutoRole PAS Plugin"
     directory="profiles/default"
     description="PAS plugin assigning roles based on source IP."
     provides="Products.GenericSetup.interfaces.EXTENSION"
     />
 
   <genericsetup:importStep
-    name="auto-role"
-    title="Auto-role PAS plugin"
-    description="Import auto-role PAS plugin."
+    name="autorole"
+    title="AutoRole PAS Plugin"
+    description="Import AutoRole PAS plugin."
     handler=".setuphandlers.importVarious">
   </genericsetup:importStep>
 

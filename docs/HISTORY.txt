@@ -17,5 +17,5 @@ Changelog
 1.1dev-r66205 2008-12-01
 ------------------------
 
-* Initial release
+* Initial PyPI release
 
