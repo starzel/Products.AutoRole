@@ -5,7 +5,7 @@ version = '2.0b2'
 
 setup(name='Products.AutoRole',
       version=version,
-      description="Add roles to (anonymous or logged-in) "
+      description="PAS plugin for adding roles to (anonymous or logged-in) "
                   "visitors based on their IP address.",
       long_description=open("README.txt").read() + "\n" +
                        open(os.path.join("docs", "HISTORY.txt")).read(),

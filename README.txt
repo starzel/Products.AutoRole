@@ -16,15 +16,26 @@ not support roles (or properties or groups) for anonymous users.
 You can disable these interfaces if only logged-in users should get
 additional roles.
 
-Furthermore, AutoRole provides a groups plugin interface, allowing you to
+AutoRole furthermore provides a groups plugin interface, allowing you to
 assign groups instead of roles.
 
 `IPRangePlugin`_ is similar but `logs in` users based on IP address.
 
 .. _IPRangePlugin: http://dev.plone.org/collective/browser/PASPlugins/IPRangePlugin
 
-Upstream Proxies
-================
+Configuration
+=============
+
+The plugin is configured by editing the **IP filter and roles** property on
+the plugins's Properties screen. Each line represent a mapping from IP
+network to roles. The format is as follows:
+
+``ip-address[/mask]: role[, role ...]``
+
+If ``mask`` bits are omitted, 32 is assumed.
+
+Proxies
+=======
 
 If your Zope server is hosted behind one or more proxies, be sure to list
 them in the zope.conf file using the ``trusted-proxy`` directive. AutoRole
