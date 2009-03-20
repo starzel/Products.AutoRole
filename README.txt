@@ -27,7 +27,7 @@ Configuration
 =============
 
 The plugin is configured by editing the **IP filter and roles** property on
-the plugin's Properties screen. Each line represent a mapping from IP
+the plugin's Properties screen. Each line represents a mapping from IP
 network to roles. The format is as follows:
 
 ``ip-address[/mask]: role[, role ...]``
