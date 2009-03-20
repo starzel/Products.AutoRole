@@ -2,7 +2,7 @@ import unittest
 
 def compiled(plugin):
     plugin._compile_subnets()
-    return plugin._v_compiled
+    return plugin._compiled
 
 
 class TestCompiler(unittest.TestCase):

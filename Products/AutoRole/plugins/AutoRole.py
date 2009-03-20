@@ -90,7 +90,7 @@ class AutoRole(BasePlugin):
         return ip
     
     def _compile_subnets(self):
-        self._v_compiled = compiled = []
+        self._compiled = compiled = []
         for line in self.ip_roles:
             try:
                 subnet, roles = line.split(':')
@@ -116,7 +116,7 @@ class AutoRole(BasePlugin):
         BasePlugin._setPropValue(self, id, value)
         if id == 'ip_roles':
             self._compile_subnets()
-            if value and len(self._v_compiled) != len(self.ip_roles):
+            if value and len(self._compiled) != len(self.ip_roles):
                 raise ValueError(
                     'ip_roles contains invalid subnets and/or roles!')
 
@@ -126,9 +126,9 @@ class AutoRole(BasePlugin):
     security.declarePrivate('getRolesForPrincipal')
     def getRolesForPrincipal(self, principal, request=None):
         """ Assign roles based on 'request'. """
-        if not getattr(self, '_v_compiled', None):
+        if not getattr(self, '_compiled', None):
             self._compile_subnets()
-        if not self._v_compiled:
+        if not self._compiled:
             return []
         
         ip = quad2int(self._find_ip(request))
@@ -136,7 +136,7 @@ class AutoRole(BasePlugin):
             return []
 
         result = set()
-        for subnet, mask, roles in self._v_compiled:
+        for subnet, mask, roles in self._compiled:
             if ip & mask == subnet:
                 result.update(roles)
         return list(result)
@@ -162,9 +162,9 @@ class AutoRole(BasePlugin):
         if getattr(request, '_auth', None):
             return {}
         
-        if not getattr(self, '_v_compiled', None):
+        if not getattr(self, '_compiled', None):
             self._compile_subnets()
-        if not self._v_compiled:
+        if not self._compiled:
             return {}
 
         # get client IP
@@ -172,7 +172,7 @@ class AutoRole(BasePlugin):
         if not ip:
             return {}
 
-        for subnet, mask, roles in self._v_compiled:
+        for subnet, mask, roles in self._compiled:
             if ip & mask == subnet:
                 return dict(AutoRole=True)
 

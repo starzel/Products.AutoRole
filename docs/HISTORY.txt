@@ -4,6 +4,9 @@ Changelog
 2.0b2 - Unreleased
 ------------------
 
+* Store compiled lookup table persistently so that all threads can
+  see changes right away.
+  [stefan]
 
 2.0b1 - 2009-03-18
 ------------------
