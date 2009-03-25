@@ -59,8 +59,6 @@ class AutoRole(BasePlugin):
              mode='w'),
     )
 
-    #manage_options = BasePlugin.manage_options[:1]
-
     def __init__(self, id, title=None, ip_roles=()):
         self._setId(id)
         self.title = title
@@ -71,23 +69,7 @@ class AutoRole(BasePlugin):
             request = getattr(self, 'REQUEST', None)
         if request is None:
             return None
-        
-        ip = request.getClientAddr()
-        
-        # Workaround Zope X-Forwarded-For bug (Collector #2321)
-        # Skip trusted proxies
-        from ZPublisher.HTTPRequest import trusted_proxies
-        if ip in trusted_proxies:
-            ips = request.get('HTTP_X_FORWARDED_FOR')
-            ips = [entry.strip() for entry in ips.split(',')]
-            ips.reverse() # Prefer right-most ip address
-            for ip in ips:
-                if not ip in getattr(request,"trusted_proxies",[]):
-                    return ip
-            else:
-                return None
-        
-        return ip
+        return request.getClientAddr()
     
     def _compile_subnets(self):
         self._compiled = compiled = []
@@ -174,7 +156,7 @@ class AutoRole(BasePlugin):
 
         for subnet, mask, roles in self._compiled:
             if ip & mask == subnet:
-                return dict(AutoRole=True)
+                return dict(AutoRole=True, subnet=subnet)
 
         return {}
 

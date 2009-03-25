@@ -4,6 +4,13 @@ Changelog
 2.0 - Unreleased
 ----------------
 
+* Remove workaround for https://bugs.launchpad.net/zope2/+bug/143914
+  which has long since been fixed.
+  [stefan]
+
+* Include 'subnet' in credentials returned for anonymous users. This is to
+  allow PAS' caching to distinguish anonymous users from different subnets.
+  [stefan]
 
 2.0b2 - 2009-03-20
 ------------------

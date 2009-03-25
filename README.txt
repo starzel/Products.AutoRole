@@ -11,7 +11,7 @@ Introduction
 The AutoRole plugin allows to assign roles to users from certain subnets.
 
 There is an extraction and authentication plugin included, to enable
-additional roles for anonymous users. This is required since PAS does
+additional roles for anonymous users. They are required since PAS does
 not support roles (or properties or groups) for anonymous users.
 You can disable these interfaces if only logged-in users should get
 additional roles.
@@ -28,11 +28,11 @@ Configuration
 
 The plugin is configured by editing the **IP filter and roles** property on
 the plugin's Properties screen. Each line represents a mapping from IP
-network to roles. The format is as follows:
+network to one or more roles. The format is as follows::
 
-``ip-address[/mask]: role[, role ...]``
+  ip-address[/mask]: role[, role ...]
 
-If ``mask`` bits are omitted, 32 is assumed.
+If ``mask`` bits are omitted, a mask of 32 is assumed.
 
 Proxies
 =======
@@ -52,8 +52,6 @@ Copyright 2008-2009 Jarn AS (http://www.jarn.com)
 
 AutoRole 1.0 development was sponsored by the Norwegian Archive, Library and
 Museum Authority
-
-For technical questions contact Helge Tesdal at Jarn <info@jarn.com>.
 
 License
 =======
