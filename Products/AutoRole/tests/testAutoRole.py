@@ -69,7 +69,7 @@ class TestAutoRole(unittest.TestCase, IRolesPlugin_conformance):
 
         helper._updateProperty('ip_roles', ['10.0.1.1/24:Manager,Member'])
         request.client_ip = '10.0.1.1'
-        self.assertEqual(helper.extractCredentials( request ), {'AutoRole':True, 'ip_address':167772417L})
+        self.assertEqual(helper.extractCredentials( request ), {'AutoRole':True})
 
         request.client_ip = '10.1.0.0'
         self.assertEqual( helper.extractCredentials( request ), {})

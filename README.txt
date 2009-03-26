@@ -42,6 +42,12 @@ them in the zope.conf file using the ``trusted-proxy`` directive. AutoRole
 depends on Zope's HTTPRequest to extract the client IP address, and it, in
 turn, uses the ``trusted-proxy`` directive to filter out proxy IP addresses.
 
+RAM Cache
+=========
+
+If you have PAS configured with a RAM Cache, you must include ``REMOTE_ADDR``
+and ``HTTP_X_FORWARDED_FOR`` in its request variables.
+
 Credits
 =======
 

@@ -156,7 +156,7 @@ class AutoRole(BasePlugin):
 
         for subnet, mask, roles in self._compiled:
             if ip & mask == subnet:
-                return dict(AutoRole=True, ip_address=ip)
+                return dict(AutoRole=True)
 
         return {}
 
