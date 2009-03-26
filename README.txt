@@ -41,8 +41,8 @@ turn, uses the ``trusted-proxy`` directive to filter out proxy IP addresses.
 RAM Cache
 =========
 
-If you have PAS configured with a RAM Cache, you must include ``REMOTE_ADDR``
-and ``HTTP_X_FORWARDED_FOR`` in its request variables.
+If you have PAS configured with a RAM Cache, you must add ``REMOTE_ADDR``
+and ``HTTP_X_FORWARDED_FOR`` to its **REQUEST variables**.
 
 Credits
 =======
