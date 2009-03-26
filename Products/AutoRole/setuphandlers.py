@@ -1,18 +1,16 @@
-from StringIO import StringIO
-from Products.PlonePAS.Extensions.Install import activatePluginInterfaces
-
 
 def setup_auto_role_plugin(portal):
     uf = portal.acl_users
     ids = uf.objectIds()
-    out = StringIO()
-
-    AutoRole = uf.manage_addProduct['AutoRole']
 
     if 'auto_role' not in ids:
-        AutoRole.addAutoRole('auto_role', 'Automatic Role Provider')
-        activatePluginInterfaces(portal, 'auto_role', out,
-                                 disable=['IGroupsPlugin'])
+        factory = uf.manage_addProduct['AutoRole']
+        factory.addAutoRole('auto_role', 'Automatic Role Provider')
+
+        plugin = uf['auto_role']
+        plugin.manage_activateInterfaces(['IExtractionPlugin',
+                                          'IAuthenticationPlugin',
+                                          'IRolesPlugin'])
 
 
 def importVarious(context):
