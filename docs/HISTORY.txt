@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.0 - Unreleased
+2.0 - 2009-03-26
 ----------------
 
 * Remove workaround for https://bugs.launchpad.net/zope2/+bug/143914
