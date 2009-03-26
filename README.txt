@@ -19,10 +19,6 @@ additional roles.
 AutoRole furthermore provides a groups plugin interface, allowing you to
 assign groups instead of roles.
 
-`IPRangePlugin`_ is similar but `logs in` users based on IP address.
-
-.. _IPRangePlugin: http://dev.plone.org/collective/browser/PASPlugins/IPRangePlugin
-
 Configuration
 =============
 
