@@ -4,6 +4,8 @@ Changelog
 2.1 - Unreleased
 ----------------
 
+* Fire ConfigurationChangedEvent when the 'ip_roles' property has changed.
+  [stefan]
 
 2.0 - 2009-03-26
 ----------------

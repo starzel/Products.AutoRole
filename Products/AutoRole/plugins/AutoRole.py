@@ -1,6 +1,9 @@
 import socket
 import struct
 
+from zope.event import notify
+from Products.AutoRole.interfaces import ConfigurationChangedEvent
+
 from AccessControl.SecurityInfo import ClassSecurityInfo
 from Globals import InitializeClass
 from Products.PageTemplates.PageTemplateFile import PageTemplateFile
@@ -101,6 +104,7 @@ class AutoRole(BasePlugin):
             if value and len(self._compiled) != len(self.ip_roles):
                 raise ValueError(
                     'ip_roles contains invalid subnets and/or roles!')
+            notify(ConfigurationChangedEvent(self))
 
     #
     # IRolesPlugin
