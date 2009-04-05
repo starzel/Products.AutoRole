@@ -44,6 +44,14 @@ RAM Cache
 If you have PAS configured with a RAM Cache, you must add ``REMOTE_ADDR``
 and ``HTTP_X_FORWARDED_FOR`` to its **REQUEST variables**.
 
+Caveat
+======
+
+If you have AutoRole configured for anonymous users and come from a network
+matching one its rules, you will NOT be able to log in with an account from
+a higher-up user folder. This is because AutoRole authenticates the Anonymous
+User which stops the lookup process.
+
 Credits
 =======
 
