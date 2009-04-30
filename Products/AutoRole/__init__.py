@@ -8,5 +8,5 @@ def initialize(context):
     context.registerClass(AutoRole.AutoRole,
                           permission=add_user_folders,
                           constructors=(AutoRole.manage_addAutoRoleForm,
-                                          AutoRole.addAutoRole),
-                           visibility=None)
+                                        AutoRole.addAutoRole),
+                          visibility=None)
