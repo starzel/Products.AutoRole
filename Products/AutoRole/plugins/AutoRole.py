@@ -60,12 +60,17 @@ class AutoRole(BasePlugin):
         dict(id='title', label='Title', type='string', mode='w'),
         dict(id='ip_roles', label='IP filter and roles', type='lines',
              mode='w'),
+        dict(id='anon_only', label='Anonymous Only', type='boolean',
+             mode='w'),
     )
+    
+    anon_only = False
 
     def __init__(self, id, title=None, ip_roles=()):
         self._setId(id)
         self.title = title
         self.ip_roles = ip_roles
+        self.anon_only = False
 
     def _find_ip(self, request=None):
         if request is None:
@@ -112,6 +117,10 @@ class AutoRole(BasePlugin):
     security.declarePrivate('getRolesForPrincipal')
     def getRolesForPrincipal(self, principal, request=None):
         """ Assign roles based on 'request'. """
+        if (self.anon_only and 
+            principal is not None and 
+            principal.getUserName() != 'Anonymous User'):
+            return []
         if not getattr(self, '_compiled', None):
             self._compile_subnets()
         if not self._compiled:

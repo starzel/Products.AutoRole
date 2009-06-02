@@ -8,6 +8,8 @@ import UserDict
 from Products.PluggableAuthService.tests.conformance \
      import IRolesPlugin_conformance
 
+from AccessControl.User import SimpleUser
+
 class FakeRequest(UserDict.UserDict):
     client_ip = ''
     _auth = None
@@ -41,6 +43,16 @@ class TestAutoRole(unittest.TestCase, IRolesPlugin_conformance):
         self.assertEqual( helper.getRolesForPrincipal( None, request ), ['Member'])
         request.client_ip = '10.0.1.1'
         self.assertEqual( helper.getRolesForPrincipal( None, request ), ['Member','Manager'])
+        
+        # Check that only anonymous get roles if anon_only is checked.
+        helper.anon_only = True
+        request.client_ip = '10.0.1.1'        
+        user = SimpleUser('someone', 'something', [], [])
+        self.assertEqual( helper.getRolesForPrincipal( user, request ), [])
+
+        user = SimpleUser('Anonymous User', 'something', [], [])
+        self.assertEqual( helper.getRolesForPrincipal( user, request ), ['Member','Manager'])
+        helper.anon_only = False
 
         # Test for invalid ip address
         helper._updateProperty('ip_roles', ['10.0.1.1/24:Manager',
