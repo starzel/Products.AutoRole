@@ -1,9 +1,10 @@
 Changelog
 =========
 
-2.0.2 - Unreleased
+2.1.0 - 2009-05-03
 ------------------
-* Added an Anonymous Only checkbox that adds roles only to anonymous users.
+* Added an Anonymous Only checkbox that makes the plugin add roles only 
+  to anonymous users.
   [regebro]
 
 2.0.1 - 2009-04-06
