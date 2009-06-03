@@ -86,20 +86,23 @@ class AutoRole(BasePlugin):
                 subnet, roles = line.split(':')
                 roles = [r.strip() for r in roles.split(',')]
                 roles = set(filter(None, roles))
+                if not roles:
+                    continue
             except (ValueError, AttributeError):
                 continue
-            try:
+            if not subnet:
+                # No ip specification
+                continue
+            if '/' in subnet:
                 subnet, bits = subnet.split('/')
                 bits = int(bits)
-                if 0 > bits > 32:
+                if 0 >= bits > 32:
                     continue
-            except ValueError:
+            else:
                 # No mask, assume 32 bits
                 bits = 32
             mask = (2 ** bits - 1) << (32 - bits)
             subnet = quad2int(subnet) & mask
-            if not (subnet and mask and roles):
-                continue
             compiled.append((subnet, mask, roles))
             
     def _setPropValue(self, id, value):

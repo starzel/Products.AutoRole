@@ -75,6 +75,11 @@ class TestAutoRole(unittest.TestCase, IRolesPlugin_conformance):
                                        'invalidsubnet',
                                         None])
 
+        # 0 is a valid subnet, meaning everything.
+        helper._updateProperty('ip_roles', ['16.16.16.16/0:Manager'])
+        request.client_ip = '240.240.240.240'
+        self.assertEqual( helper.getRolesForPrincipal( None, request ), ['Manager'])
+
     def test_extractCredentials( self ):
         helper = self._makeOne()
         request = FakeRequest()

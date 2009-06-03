@@ -1,6 +1,12 @@
 Changelog
 =========
 
+2.1.1 - 2009-05-03
+------------------
+* AutoRole was of the opinion that 0 was an invalid netmask. It isn't,
+  it's perfectly valid and means "everything". I added support for that.
+  [regebro]
+
 2.1.0 - 2009-05-03
 ------------------
 * Added an Anonymous Only checkbox that makes the plugin add roles only 
