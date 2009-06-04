@@ -1,6 +1,14 @@
 Changelog
 =========
 
+2.1.2 - unreleased
+------------------
+* The compiling of rules on reading could make page loads commit to databases,
+  and also caused loads of conflict errors in conjunction with an LDAP setup
+  when the LDAP server was unreachable. Changed this to a more stable handling
+  of the compiled rules.
+  [regebro]
+
 2.1.1 - 2009-05-03
 ------------------
 * AutoRole was of the opinion that 0 was an invalid netmask. It isn't,

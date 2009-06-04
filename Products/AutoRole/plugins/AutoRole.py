@@ -65,6 +65,7 @@ class AutoRole(BasePlugin):
     )
     
     anon_only = False
+    self._compiled = []
 
     def __init__(self, id, title=None, ip_roles=()):
         self._setId(id)
@@ -124,8 +125,6 @@ class AutoRole(BasePlugin):
             principal is not None and 
             principal.getUserName() != 'Anonymous User'):
             return []
-        if not getattr(self, '_compiled', None):
-            self._compile_subnets()
         if not self._compiled:
             return []
         
@@ -160,8 +159,6 @@ class AutoRole(BasePlugin):
         if getattr(request, '_auth', None):
             return {}
         
-        if not getattr(self, '_compiled', None):
-            self._compile_subnets()
         if not self._compiled:
             return {}
 
