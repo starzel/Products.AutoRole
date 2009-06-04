@@ -65,7 +65,7 @@ class AutoRole(BasePlugin):
     )
     
     anon_only = False
-    self._compiled = []
+    _compiled = []
 
     def __init__(self, id, title=None, ip_roles=()):
         self._setId(id)
