@@ -65,13 +65,13 @@ class AutoRole(BasePlugin):
     )
     
     anon_only = False
-    _compiled = []
 
     def __init__(self, id, title=None, ip_roles=()):
         self._setId(id)
         self.title = title
         self.ip_roles = ip_roles
         self.anon_only = False
+        self._compiled = []
 
     def _find_ip(self, request=None):
         if request is None:
