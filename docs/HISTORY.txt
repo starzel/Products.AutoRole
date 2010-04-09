@@ -3,6 +3,11 @@ Changelog
 
 2.1.2 - unreleased
 ------------------
+* On 64bit python2.4 (e.g. from a collective python buildout) socket.inet_aton
+  returns 8 bytes. http://bugs.python.org/issue1008086 was not fixed for
+  python2.4 so work around the issue.
+  [elro]
+
 * The compiling of rules on reading could make page loads commit to databases,
   and also caused loads of conflict errors in conjunction with an LDAP setup
   when the LDAP server was unreachable. Changed this to a more stable handling

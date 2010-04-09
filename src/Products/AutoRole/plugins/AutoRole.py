@@ -45,6 +45,7 @@ def addAutoRole( dispatcher
 def quad2int(ip):
     "Convert an IP address in dotted quad notation to base10 integer"
     try:
+        ip = ip[:4] # http://bugs.python.org/issue1008086 not fixed in 2.4
         return struct.unpack('!L', socket.inet_aton(ip))[0]
     except (TypeError, socket.error):
         return 0
