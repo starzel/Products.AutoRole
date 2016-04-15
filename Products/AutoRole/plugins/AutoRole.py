@@ -20,7 +20,7 @@ try:
 except NameError:
     # Python 2.3
     from sets import Set as set
-    
+
 
 manage_addAutoRoleForm = PageTemplateFile(
     'www/autoRoleAdd', globals(), __name__='manage_addAutoRoleForm')
@@ -63,7 +63,7 @@ class AutoRole(BasePlugin):
         dict(id='anon_only', label='Anonymous Only', type='boolean',
              mode='w'),
     )
-    
+
     anon_only = False
 
     def __init__(self, id, title=None, ip_roles=()):
@@ -78,7 +78,7 @@ class AutoRole(BasePlugin):
         if request is None:
             return None
         return request.getClientAddr()
-    
+
     def _compile_subnets(self):
         self._compiled = compiled = []
         for line in self.ip_roles:
@@ -104,7 +104,7 @@ class AutoRole(BasePlugin):
             mask = (2 ** bits - 1) << (32 - bits)
             subnet = quad2int(subnet) & mask
             compiled.append((subnet, mask, roles))
-            
+
     def _setPropValue(self, id, value):
         BasePlugin._setPropValue(self, id, value)
         if id == 'ip_roles':
@@ -120,15 +120,15 @@ class AutoRole(BasePlugin):
     security.declarePrivate('getRolesForPrincipal')
     def getRolesForPrincipal(self, principal, request=None):
         """ Assign roles based on 'request'. """
-        if (self.anon_only and 
-            principal is not None and 
+        if (self.anon_only and
+            principal is not None and
             principal.getUserName() != 'Anonymous User'):
             return []
         if not getattr(self, '_compiled', None):
             self._compile_subnets()
         if not self._compiled:
             return []
-        
+
         ip = quad2int(self._find_ip(request))
         if not ip:
             return []
@@ -159,7 +159,7 @@ class AutoRole(BasePlugin):
         # root becoming anonymous...
         if getattr(request, '_auth', None):
             return {}
-        
+
         if not getattr(self, '_compiled', None):
             self._compile_subnets()
         if not self._compiled:
@@ -181,7 +181,7 @@ class AutoRole(BasePlugin):
     #
     security.declarePrivate('authenticateCredentials')
     def authenticateCredentials(self, credentials):
-        if credentials.has_key('login'):
+        if credentials.get('login'):
             return None
         autorole = credentials.get('AutoRole', None)
         if not autorole:
