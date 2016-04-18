@@ -1,5 +1,6 @@
 import socket
 import struct
+import logging
 
 from zope.event import notify
 from Products.AutoRole.interfaces import ConfigurationChangedEvent
@@ -21,6 +22,7 @@ except NameError:
     # Python 2.3
     from sets import Set as set
 
+log = logging.getLogger(__name__)
 
 manage_addAutoRoleForm = PageTemplateFile(
     'www/autoRoleAdd', globals(), __name__='manage_addAutoRoleForm')
@@ -73,11 +75,30 @@ class AutoRole(BasePlugin):
         self.anon_only = False
 
     def _find_ip(self, request=None):
+        """ Extract the client IP address from the HTTP request
+        in a proxy-compatible way.
+
+        @return: IP address as a string or None if not available
+        """
         if request is None:
             request = getattr(self, 'REQUEST', None)
         if request is None:
             return None
-        return request.getClientAddr()
+        if "HTTP_X_FORWARDED_FOR" in request.environ:
+            # Virtual host
+            ip = request.environ["HTTP_X_FORWARDED_FOR"]
+        elif "HTTP_HOST" in request.environ:
+            # Non-virtualhost
+            ip = request.environ["REMOTE_ADDR"]
+        else:
+            # Unit test code?
+            ip = None
+        log.debug('request.getClientAddr(): {0}'.format(
+            request.getClientAddr()))
+        log.debug('HTTP_X_FORWARDED_FOR: {0}'.format(
+            request.get('HTTP_X_FORWARDED_FOR')))
+        log.debug('REMOTE_ADDR: {0}'.format(request.get('REMOTE_ADDR')))
+        return ip
 
     def _compile_subnets(self):
         self._compiled = compiled = []
@@ -121,8 +142,8 @@ class AutoRole(BasePlugin):
     def getRolesForPrincipal(self, principal, request=None):
         """ Assign roles based on 'request'. """
         if (self.anon_only and
-            principal is not None and
-            principal.getUserName() != 'Anonymous User'):
+                principal is not None and
+                principal.getUserName() != 'Anonymous User'):
             return []
         if not getattr(self, '_compiled', None):
             self._compile_subnets()
